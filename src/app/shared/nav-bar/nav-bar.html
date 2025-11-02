@@ -1,0 +1,18 @@
+<nav class="nav">
+    <div class="logo">
+        <img src="http://sumou.ddns.net/static/icon.png" alt="蘇氏Chat logo">
+        <p>蘇氏Chat</p>
+    </div>
+    <div class="user">
+        @if (user_name.length == 0) {
+        <div class="link_container">
+            <button [routerLink]="['/login']" type="button" class="auth-btn login">登入</button>
+        </div>
+        <div class="link_container">
+            <button [routerLink]="['/register']" type="button" class="auth-btn register">註冊</button>
+        </div>
+        }@else{
+        <p class="user_name">當前登入：{{ user_name }}</p>
+        }
+    </div>
+</nav>
