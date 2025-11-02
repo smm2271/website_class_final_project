@@ -1,17 +1,24 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'login-page',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
+
 
 export class Login {
   user_name: string = "";
   password: string = "";
   submitLogin = () => {
-    console.log(`User Name: ${this.user_name}, Password: ${this.password}`);
+    if (this.user_name === "user" && this.password === "password") {
+      alert("登入成功");
+    } else {
+      alert("登入失敗");
+    }
   }
 }
