@@ -15,10 +15,11 @@
         </div>
         <div class="input_group">
             <label for="confirm_password">確認密碼</label>
-            <input type="password" id="confirm_password" name="confirm_password" required [(ngModel)]="confirm_password">
+            <input type="password" id="confirm_password" name="confirm_password" required
+                [(ngModel)]="confirm_password">
         </div>
         @if (!is_passwords_match) {
-            <p class="error-message">密碼與確認密碼不符。</p>
+        <p class="error-message">密碼與確認密碼不符。</p>
         }
         <button type="button" class="submit-btn" (click)="register()">註冊</button>
     </form>

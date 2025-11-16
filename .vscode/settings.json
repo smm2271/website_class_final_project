@@ -1,0 +1,39 @@
+{
+    // 編輯器設定
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    // TypeScript/JavaScript 設定
+    "[typescript]": {
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[javascript]": {
+        "editor.tabSize": 4
+    },
+    // HTML 設定
+    "[html]": {
+        "editor.tabSize": 4
+    },
+    // SCSS/CSS 設定
+    "[scss]": {
+        "editor.tabSize": 4
+    },
+    "[css]": {
+        "editor.tabSize": 4
+    },
+    // JSON 設定
+    "[json]": {
+        "editor.tabSize": 4
+    },
+    "[jsonc]": {
+        "editor.tabSize": 4
+    },
+    // 格式化設定
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    // 檔案設定
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true
+}

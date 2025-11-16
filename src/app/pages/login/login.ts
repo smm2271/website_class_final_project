@@ -5,38 +5,38 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'login-page',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './login.html',
-  styleUrl: './login.scss',
+    selector: 'login-page',
+    standalone: true,
+    imports: [CommonModule, FormsModule],
+    templateUrl: './login.html',
+    styleUrl: './login.scss',
 })
 
 
 export class Login {
-  user_name: string = "";
-  password: string = "";
-  errorMessage: string = "";
+    user_name: string = "";
+    password: string = "";
+    errorMessage: string = "";
 
 
-  private userService = inject(UserService);
-  private router = inject(Router);
+    private userService = inject(UserService);
+    private router = inject(Router);
 
-  login() {
-    const loginForm: UserLoginForm = {
-      user_id: this.user_name,
-      password: this.password
-    };
+    login() {
+        const loginForm: UserLoginForm = {
+            user_id: this.user_name,
+            password: this.password
+        };
 
-    this.userService.loginApi(loginForm).subscribe({
-      next: (response) => {
-        console.log('登入成功:', response);
-        this.router.navigate(['/home']);
-      },
-      error: (error) => {
-        console.error('登入失敗:', error);
-        // 顯示錯誤訊息
-      }
-    });
-  }
+        this.userService.loginApi(loginForm).subscribe({
+            next: (response) => {
+                console.log('登入成功:', response);
+                this.router.navigate(['/home']);
+            },
+            error: (error) => {
+                console.error('登入失敗:', error);
+                // 顯示錯誤訊息
+            }
+        });
+    }
 }

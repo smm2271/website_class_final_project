@@ -7,16 +7,16 @@ import { UserService } from '../services/user.service';
  * 用於登入和註冊頁面，防止已登入用戶重複訪問
  */
 export const guestGuard: CanActivateFn = (route, state) => {
-  const userService = inject(UserService);
-  const router = inject(Router);
+    const userService = inject(UserService);
+    const router = inject(Router);
 
-  // 如果用戶未登入，允許訪問
-  if (!userService.isAuthenticated()) {
-    return true;
-  }
+    // 如果用戶未登入，允許訪問
+    if (!userService.isAuthenticated()) {
+        return true;
+    }
 
-  // 如果用戶已登入，重定向到首頁
-  console.log('用戶已登入，重定向到首頁');
-  router.navigate(['/']);
-  return false;
+    // 如果用戶已登入，重定向到首頁
+    console.log('用戶已登入，重定向到首頁');
+    router.navigate(['/']);
+    return false;
 };
