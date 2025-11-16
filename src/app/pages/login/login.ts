@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService, UserLoginForm } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -14,11 +16,27 @@ import { CommonModule } from '@angular/common';
 export class Login {
   user_name: string = "";
   password: string = "";
-  submitLogin = () => {
-    if (this.user_name === "user" && this.password === "password") {
-      alert("登入成功");
-    } else {
-      alert("登入失敗");
-    }
+  errorMessage: string = "";
+
+
+  private userService = inject(UserService);
+  private router = inject(Router);
+
+  login() {
+    const loginForm: UserLoginForm = {
+      user_id: 'testuser',
+      password: 'password123'
+    };
+
+    this.userService.loginApi(loginForm).subscribe({
+      next: (response) => {
+        console.log('登入成功:', response);
+        this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        console.error('登入失敗:', error);
+        // 顯示錯誤訊息
+      }
+    });
   }
 }
