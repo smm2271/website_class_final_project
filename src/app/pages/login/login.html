@@ -7,7 +7,11 @@
         </div>
         <div class="input_group">
             <label for="password">密碼</label>
-            <input type="password" id="password" name="password" required [(ngModel)]="password">
+            <input type="password" id="password" name="password" required [(ngModel)]="password"
+                (input)="errorMessage=''">
+            @if (errorMessage) {
+            <div class="error-message">{{ errorMessage }}</div>
+            }
         </div>
         <button type="button" class="submit-btn" (click)="login()">登入</button>
     </form>

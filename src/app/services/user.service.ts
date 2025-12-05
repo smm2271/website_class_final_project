@@ -2,6 +2,7 @@ import { Injectable, signal, computed, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, catchError, throwError } from 'rxjs';
 import { User, AuthState } from '../models/user.model';
+import { Router } from '@angular/router';
 
 // API 請求和響應介面
 export interface UserLoginForm {
@@ -26,8 +27,9 @@ export interface UserResponseModel {
 })
 
 export class UserService {
+    private router = inject(Router);
     private http = inject(HttpClient);
-    private apiUrl = 'http://192.168.4.43:8000/user'; // 根據你的後端 API 路徑調整
+    private apiUrl = 'http://sumou.ddns.net:8000/user'; // 根據你的後端 API 路徑調整
 
     // 使用 signal 來管理用戶狀態
     private authState = signal<AuthState>({
@@ -71,6 +73,7 @@ export class UserService {
         });
 
         this.clearUserFromStorage();
+        this.router.navigate(['/login']);
     }
 
     /**

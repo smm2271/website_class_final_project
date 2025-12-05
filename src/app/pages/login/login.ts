@@ -34,8 +34,11 @@ export class Login {
                 this.router.navigate(['/home']);
             },
             error: (error) => {
-                console.error('登入失敗:', error);
-                // 顯示錯誤訊息
+                if (error.status === 401) {
+                    this.errorMessage = "帳號或密碼錯誤，請重新輸入。";
+                } else {
+                    this.errorMessage = "發生錯誤，請稍後再試。";
+                }
             }
         });
     }

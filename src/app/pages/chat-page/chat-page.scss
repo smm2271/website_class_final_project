@@ -1,0 +1,65 @@
+// 容器設定
+.chat-layout {
+    display: flex;
+    width: 100%;
+    // 扣除 Navbar 高度 (桌面版 80px)
+    height: calc(100vh - 80px);
+    overflow: hidden;
+    position: relative;
+}
+
+// 桌面版預設樣式 (並排顯示)
+.sidebar-panel {
+    width: 320px; // 側邊欄固定寬度
+    height: 100%;
+    border-right: 1px solid #e0e0e0;
+    z-index: 1;
+}
+
+.message-panel {
+    flex: 1; // 佔滿剩餘空間
+    height: 100%;
+    position: relative;
+}
+
+// 手機版響應式樣式 (<= 768px)
+@media screen and (max-width: 768px) {
+    .chat-layout {
+        // 手機版 Navbar 通常較矮 (例如 50px)
+        height: calc(100vh - 50px);
+    }
+
+    .sidebar-panel,
+    .message-panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    // 預設狀態：顯示列表，將聊天室藏在右側
+    .sidebar-panel {
+        transform: translateX(0);
+        z-index: 10;
+    }
+
+    .message-panel {
+        transform: translateX(100%);
+        z-index: 20;
+    }
+
+    // 當進入聊天室狀態 (.mobile-show-message)
+    .chat-layout.mobile-show-message {
+        .sidebar-panel {
+            // 可選：讓列表稍微往左移產生視差，或保持不動
+            transform: translateX(-20%);
+        }
+
+        .message-panel {
+            // 聊天室滑入畫面
+            transform: translateX(0);
+        }
+    }
+}
