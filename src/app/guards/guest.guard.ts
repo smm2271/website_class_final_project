@@ -16,7 +16,7 @@ export const guestGuard: CanActivateFn = (route, state) => {
     }
 
     // 如果用戶已登入，重定向到首頁
-    console.log('用戶已登入，重定向到首頁');
-    router.navigate(['/']);
+    console.log('用戶已登入，重定向到聊天頁面');
+    router.navigate(['/chat']);
     return false;
 };

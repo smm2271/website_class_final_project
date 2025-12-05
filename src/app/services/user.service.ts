@@ -27,7 +27,7 @@ export interface UserResponseModel {
 
 export class UserService {
     private http = inject(HttpClient);
-    private apiUrl = 'http://localhost:8000/user'; // 根據你的後端 API 路徑調整
+    private apiUrl = 'http://192.168.4.43:8000/user'; // 根據你的後端 API 路徑調整
 
     // 使用 signal 來管理用戶狀態
     private authState = signal<AuthState>({
@@ -189,9 +189,14 @@ export class UserService {
         return this.http.post<UserResponseModel>(
             `${this.apiUrl}/login`,
             loginForm,
-            { withCredentials: true } // 啟用 cookie
+            {
+                withCredentials: true,
+                observe: 'body',
+                responseType: 'json'
+            }
         ).pipe(
             tap(response => {
+                console.log('登入響應:', response);
                 // 將後端響應轉換為 User 格式並更新狀態
                 const user: User = {
                     id: response.id,
@@ -202,7 +207,12 @@ export class UserService {
                 this.login(user, 'cookie-based'); // 使用佔位符表示基於 cookie 的認證
             }),
             catchError(error => {
-                console.error('登入失敗:', error);
+                console.error('登入失敗詳情:', {
+                    status: error.status,
+                    statusText: error.statusText,
+                    message: error.message,
+                    error: error.error
+                });
                 return throwError(() => error);
             })
         );
@@ -237,10 +247,15 @@ export class UserService {
         return this.http.post<UserResponseModel>(
             `${this.apiUrl}/register`,
             registerForm,
-            { withCredentials: true }
+            {
+                withCredentials: true,
+                observe: 'body',
+                responseType: 'json'
+            }
         ).pipe(
             tap(response => {
-                // 註冊成功後可以選擇自動登入
+                console.log('註冊響應:', response);
+                // 註冊成功後自動登入
                 const user: User = {
                     id: response.id,
                     username: response.username,
@@ -249,13 +264,16 @@ export class UserService {
                 this.login(user, 'cookie-based');
             }),
             catchError(error => {
-                console.error('註冊失敗:', error);
+                console.error('註冊失敗詳情:', {
+                    status: error.status,
+                    statusText: error.statusText,
+                    message: error.message,
+                    error: error.error
+                });
                 return throwError(() => error);
             })
         );
-    }
-
-    /**
+    }    /**
      * 刷新 token（調用後端 API）
      */
     refreshTokenApi(): Observable<any> {
